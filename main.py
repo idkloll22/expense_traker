@@ -1,10 +1,11 @@
-from nicegui import ui
+import sqlite3
+from pathlib import Path
 
+DB_NAME = "main.db"
 
-ui.table(rows=[
-    {"date":2026, "description":"lunch", "amount":130},
-    {"date":2026, "description":"jeep fee", "amount":450},
-    {"date":2026, "description":"eletric bill", "amount":3500},
+inited_database()
+
+table_data = ui.table(rows=[
 ], columns=[
     {"name":"col_date", "label":"Date", "field":"date"},
     {"name":"col_descript", "label":"Description", "field":"description"},
@@ -22,7 +23,10 @@ with ui.dialog() as dialog, ui.card().classes("w-106 p-6 gap-4 rounded-2xl"):
 
     with ui.row().classes("w-full justify-end gap-3"):
         ui.button("cancel", on_click=dialog.close)
-        ui.button("Add")
+        ui.button("Add", on_click = lambda: [table_data.add_rows([{
+            "date":date.value, "description":description.value, "amount":amount.value}]),
+            dialog.close()
+        ])
 ui.button("Open", on_click=dialog.open)
 
 
