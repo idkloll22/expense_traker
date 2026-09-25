@@ -1,12 +1,9 @@
 import sqlite3
 from pathlib import Path
 
-DB_NAME = "main.db"
-
-inited_database()
 
 table_data = ui.table(rows=[
-], columns=[
+],row_key="id" columns=[
     {"name":"col_date", "label":"Date", "field":"date"},
     {"name":"col_descript", "label":"Description", "field":"description"},
     {"name":"amount", "label":"Amount", "field":"amount"},
