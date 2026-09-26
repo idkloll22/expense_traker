@@ -17,4 +17,17 @@ def add_expenses(date, description, amount):
         cur.execute("INSERT INTO expenses (date, description, amount) VALUES(?, ?, ?)",
             (date, description, amount)
         )
-        print("s")
+
+def fetch_data():
+    with sqlite3.connect(db_name) as con:
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM expenses")
+        raw_data = cur.fetchall()
+
+        return [dict(row) for row in raw_data]
+
+def delete_data(data_id):
+    with sqlite3.connect(db_name) as con:
+        cur = con.cursor()
+        cur.execute("DELETE FROM expenses WHERE id = ?", (data_id,))
