@@ -1,6 +1,7 @@
 import sqlite3
+from pathlib import Path
 
-db_name = "main.db"
+db_name = Path("/app/data/main.db")
 
 with sqlite3.connect(db_name) as con:
     cur = con.cursor()
